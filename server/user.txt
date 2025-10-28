@@ -1,0 +1,3 @@
+Default User Credentials:
+Username: admin
+Password: pokemon123

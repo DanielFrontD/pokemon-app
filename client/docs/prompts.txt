@@ -1,0 +1,170 @@
+POKÉDEX APPLICATION - USER PROMPTS LOG
+==========================================
+
+Prompt #1 (2025-10-27T14:24:32.287-05:00):
+-------------------------------------------
+Lets create an UI application called "Pokédex", we should use the following stack:
+
+- ReactJS with Typescript
+- NextJS, we need it for SEO
+- Tailwind CSS
+- Jest, to add testing to the basic functionalities
+
+Before we start to create all the folders and the application, lets create a plan.md inside /docs, there we need to define the folder structure by a type->feature pattern. Consider this:
+
+Views:
+1. Login (the route should be: /)
+2. Search Pokemons:  with a text field placed at the top of the view to search a pokemon, and render the results (the route should be: /pokemons)
+3. Pokemon detail view: with all the details of the pokemon (the route should be: /pokemons/id)
+
+  - Authorization:
+    We need to use getServerSideProps to validate if the token that is saved in the cookie is not expired, this validation should work for the views "Search Pokemons" and "Pokemon detail"
+
+Components (For now):
+
+1. SearchPokemonTextField: This should use a hook that returns the results by a given name
+2. PokemonBox: this should render the number, name and image of the pokemon
+3. SortRadioButtons: This should render two options: "Number" and "Name"
+4. AboutPokemon: This should render an icon, a value and a label
+5. PokemonTypePill: this should render a pill by a given array of strings
+6. Pokemon stats: By given stats, this should render a bar from 0 to 100, and fill the bar by the given number
+7. ChangePokemonArrow: left or right arrow to change the current pokemon id
+
+Hooks (for now), consider use useQuery:
+
+1. useAuth (login, validateTokenExpiration)
+2. useFetchPokemons (getPokemonByName, getPokemonsByPage)
+3. useCurrentPokemon (getPokemonById)
+
+Use react context api to store the data
+
+Also, add "prompts.txt" and save every prompt that I give to you there
+
+Prompt #2 (2025-10-27T14:38:12.029-05:00):
+-------------------------------------------
+I made some changes on the components folder structure, inside PokemonDetail add PokemonDetailHeader and PokemonDetailBody.
+
+Also, lets add a tailwind config file:
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#E03A2D',
+        type: {
+          bug: '#A7B723',
+          dark: '#70574C',
+          dragon: '#7037FF',
+          electric: '#F9CF30',
+          fairy: '#E69AC3',
+          fighting: '#C12239',
+          fire: '#F57D31',
+          flying: '#A891EC',
+          ghost: '#70559B',
+          grass: '#74CB48',
+          ground: '#DEC168',
+          ice: '#9AD6DF',
+          normal: '#AAA67F',
+          poison: '#A43E9E',
+          psychic: '#FB5584',
+          rock: '#B6A136',
+          steel: '#B7B9D0',
+          water: '#6493EB',
+        },
+        grayscale: {
+          dark: '#212121',
+          medium: '#666666',
+          light: '#DEDEDE',
+          background: '#F5F5F5',
+          white: '#FFFFFF',
+        },
+      },
+      fontSize: {
+        'headline': ['24px', { lineHeight: '32px' }],
+        'subtitle-3': ['16px', { lineHeight: '16px' }],
+        'subtitle-1': ['14px', { lineHeight: '16px' }],
+        'subtitle-2': ['12px', { lineHeight: '16px' }],
+        'body-3': ['16px', { lineHeight: '16px' }],
+        'body-1': ['14px', { lineHeight: '16px' }],
+        'body-2': ['12px', { lineHeight: '16px' }],
+        'caption': ['8px', { lineHeight: '12px' }],
+      },
+      boxShadow: {
+        'drop-2': '0px 1px 3px 0px rgba(33, 33, 33, 0.1)',
+        'drop-6': '0px 6px 12px 0px rgba(33, 33, 33, 0.2)',
+        'inner-2': 'inset 0px 1px 3px 0px rgba(33, 33, 33, 0.1)',
+      },
+    },
+  },
+  plugins: [],
+};
+
+Consider update the plan.md file
+
+Prompt #3 (2025-10-27T14:43:10.932-05:00):
+-------------------------------------------
+Ok, lets start with the phase 1 of the development phases, and inside /docs create a file called implementation-1.md with relevant information about the proccess
+
+--- NOTE: I got some issues with my local end, so I have close the chat and open it again
+
+Prompt #4 (2025-10-27T15:05:52.036-05:00):
+-------------------------------------------
+ok, so lets continue with the last propmpt in the file
+Prompt #5 (2025-10-27T15:41:27.355-05:00):
+-------------------------------------------
+I made some changes about the tailwind configuration, lets consider the there is an API that we should use.
+
+Read the document of ../server/README.md, there is all the info about the API
+
+Consider add this in the plan.md file and in your implementation steps
+Prompt #6 (2025-10-27T16:17:55.756-05:00):
+-------------------------------------------
+in src\app\pokemons\page.tsx Could you validate the cookie before render the view?
+
+Prompt #7 (2025-10-27T16:20:14.644-05:00):
+-------------------------------------------
+There is /logout add it to logout button
+
+Prompt #8 (2025-10-27T16:22:10.971-05:00):
+-------------------------------------------
+review again ../server/README.md, check the /logout api and implement it
+
+Prompt #9 (2025-10-27T16:24:51.507-05:00):
+-------------------------------------------
+In the logout add a dialog to confirm if the users wants to log out
+
+Prompt #10 (2025-10-27T16:28:23.511-05:00):
+-------------------------------------------
+Make another change, the token that return the API should expired in 2 hours, make the changes considering this...also, yoa are not updating the propmt.txt file
+Prompt #11 (2025-10-27T16:36:14.637-05:00):
+-------------------------------------------
+lets continue with the phase 2 of your implementation plan, also create the implementation-2.md file
+Prompt #12 (2025-10-27T16:42:14.147-05:00):
+-------------------------------------------
+continue with the next phase, and create the file
+Prompt #13 (2025-10-27T16:49:42.842-05:00):
+-------------------------------------------
+continue with the next phase, and create the file
+Prompt #14 (2025-10-27T17:12:21.310-05:00):
+-------------------------------------------
+We need to add another step before continue with the Polish & optmization phase. In this new step, we need to make improvements to the visual aspects. To do this, I'll need to analyze the images in /docs/design.
+
+Analyze the images there. Each image corresponds to a prototype based on the views we've built. Update your plan.md based on your conclusions from your analysis before do anything else
+
+Prompt #15 (2025-10-27T17:18:09.767-05:00):
+-------------------------------------------
+Dont remove the logout button, if there is missing image omit it fow now
+Prompt #16 (2025-10-27T17:21:48.705-05:00):
+-------------------------------------------
+Now, create the implementation-4.5.md and proceed with the steps
+Prompt #17 (2025-10-27T19:23:07.404-05:00):
+-------------------------------------------
+I made a lot of changes, do another analisys
+
+Prompt #18 (2025-10-27T19:26:15.577-05:00):
+-------------------------------------------
+Now everything is set, continue with the next step
+Prompt #19 (2025-10-27T19:55:19.766-05:00):
+-------------------------------------------
+Add some basic unit test using jest

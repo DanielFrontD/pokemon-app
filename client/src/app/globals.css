@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #DC0A2D;
+
+  --color-type-bug: #A7B723;
+  --color-type-dark: #70574C;
+  --color-type-dragon: #7037FF;
+  --color-type-electric: #F9CF30;
+  --color-type-fairy: #E69AC3;
+  --color-type-fighting: #C12239;
+  --color-type-fire: #F57D31;
+  --color-type-flying: #A891EC;
+  --color-type-ghost: #70559B;
+  --color-type-grass: #74CB48;
+  --color-type-ground: #DEC168;
+  --color-type-ice: #9AD6DF;
+  --color-type-normal: #AAA67F;
+  --color-type-poison: #A43E9E;
+  --color-type-psychic: #FB5584;
+  --color-type-rock: #B6A136;
+  --color-type-steel: #B7B9D0;
+  --color-type-water: #6493EB;
+
+  --color-grayscale-dark: #212121;
+  --color-grayscale-medium: #666666;
+  --color-grayscale-light: #DEDEDE;
+  --color-grayscale-background: #F5F5F5;
+  --color-grayscale-white: #FFFFFF;
+
+  --font-size-headline: 24px;
+  --font-size-subtitle-3: 16px;
+  --font-size-subtitle-1: 14px;
+  --font-size-subtitle-2: 12px;
+  --font-size-body-3: 16px;
+  --font-size-body-1: 14px;
+  --font-size-body-2: 12px;
+  --font-size-caption: 8px;
+
+  --shadow-drop-2: 0px 1px 3px 0px rgba(33, 33, 33, 0.1);
+  --shadow-drop-6: 0px 6px 12px 0px rgba(33, 33, 33, 0.2);
+  --shadow-inner-2: inset 0px 1px 3px 0px rgba(33, 33, 33, 0.1);
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Skip link for screen readers */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Stagger animation for grid items */
+.animate-stagger {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-stagger:nth-child(1) { animation-delay: 0.1s; }
+.animate-stagger:nth-child(2) { animation-delay: 0.2s; }
+.animate-stagger:nth-child(3) { animation-delay: 0.3s; }
+.animate-stagger:nth-child(4) { animation-delay: 0.4s; }
+.animate-stagger:nth-child(5) { animation-delay: 0.5s; }
+.animate-stagger:nth-child(6) { animation-delay: 0.6s; }
+.animate-stagger:nth-child(7) { animation-delay: 0.7s; }
+.animate-stagger:nth-child(8) { animation-delay: 0.8s; }
+.animate-stagger:nth-child(9) { animation-delay: 0.9s; }
+
+/* Typography classes */
+.text-headline {
+  font-size: var(--font-size-headline);
+  line-height: 32px;
+}
+
+.text-subtitle-3 {
+  font-size: var(--font-size-subtitle-3);
+  line-height: 16px;
+}
+
+.text-subtitle-1 {
+  font-size: var(--font-size-subtitle-1);
+  line-height: 16px;
+}
+
+.text-subtitle-2 {
+  font-size: var(--font-size-subtitle-2);
+  line-height: 16px;
+}
+
+.text-body-3 {
+  font-size: var(--font-size-body-3);
+  line-height: 16px;
+}
+
+.text-body-1 {
+  font-size: var(--font-size-body-1);
+  line-height: 16px;
+}
+
+.text-body-2 {
+  font-size: var(--font-size-body-2);
+  line-height: 16px;
+}
+
+.text-caption {
+  font-size: var(--font-size-caption);
+  line-height: 12px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-grayscale-light: #CCCCCC;
+    --color-grayscale-medium: #555555;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

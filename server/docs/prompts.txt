@@ -1,0 +1,83 @@
+PROMPT 1 (2025-10-27T09:39:32.306-05:00):
+I need to create an API in Javascript using NodeJS, with express and SQLite. This project should be called "pokemonApi" and consider the following items:
+
+- Create a src folder
+- Inside src, create a database folder and inside of it, create a file called "connection.js" and add SQLite DBB connection setup
+- Inside the database folder create another folder called "entities"
+- Create an entity called "User.js" this entity will have the following attributes "username", "password", "lastLoginTime"
+- Inside src, add and index file that will contain the express routes create folders called controllers and services
+- Inside controllers, create user.controller.js with a login method
+- Create a main file called "app.js", create a express server on it, add middlewares with cors, json definition, and create another middleware that will refer to the endpoints
+- Create a folder called "/docs" inside create a folder called "prompts.txt" and save every prompt that I give to you there
+
+PROMPT 2 (2025-10-27T09:52:26.818-05:00):
+Lets create a utility endpoint to create a encrypt password, also update login method of user.controller.js compare the encrypted password with the one that is saved in the DBB
+
+PROMPT 3 (2025-10-27T10:00:49.127-05:00):
+Make a change in the user controller, move every logic that use the "User" entity, to a login method in user.service.js file inside the services folder. Also in user controller add a 200 response when the user login successfully
+
+PROMPT 4 (2025-10-27T10:20:26.524-05:00):
+When the pokemon.db file is created, lets create a default user with the encrypted password if does not exist, and add a file at the root called user.txt with the username and password unencrypted
+
+PROMPT 5 (2025-10-27T10:25:51.687-05:00):
+On login, lets return JWT that contains the username and the lastLoginTime
+
+PROMPT 6 (2025-10-27T10:41:16.036-05:00):
+We need to add an expiration time for the token, set a default value of 2 hours, also save the last created token in the User table, if the same user tries to login before the token expires, we must return the same token that is saved in the database, if he tries to login after the expiration time, the API must return a new token, saved it and update the lastLoginTime with Date.now()
+
+PROMPT 7 (2025-10-27T11:43:51.435-05:00):
+Now, we need to use the https://pokeapi.co/api/v2 to create the following endpoint:
+
+- /pokemons:  this endpoint should return a list of pokemons, we expect the client send a payload like:
+  {
+    pageSize: 9,
+    pageNumber: 1,
+    sortCriteria: 'number' // It can be 'number' or 'name'
+  }
+
+  First, validate if there a is valid token included on the header.Authorization based on the expiration time of the token, add a middleware that allows reusing this validation on other endpoints. If the token is missing or expired return a 401 response
+
+  If the token is ok, we should use pageSize and PageNumber, to create "start" and "end" values, then use it to make a request to https://pokeapi.co/api/v2/pokemon?limit={end}&offset={start}, this will return something like this:
+
+  {
+    next: '' // next page
+    previous: '' // previous page,
+    results: [
+      {
+        name: 'Pokemon Name',
+        url: '' // Endpoint to get more data from the pokemon
+      }
+    ]
+  }
+
+  After we get the response, we have to go through each result, and make a request taking the value of "url" to get the pokemon number and image:
+
+  - image: should be taken from "sprites.other.official-artwork.front_default"
+  - number: should be taken from "id"
+
+  After we get all this data, we should create and array and sort it by "sortCriteria" and then, give a 200 response. Also add a 400 status response if any given value is not ok
+
+PROMPT 8 (2025-10-27T12:42:04.884-05:00):
+Lets create another endpoint called /pokemons/search/{name}, this endpoint should make a request to /pokemon/{name} and this should return name, number and image as the previous one in inside the same array of "pokemons"
+
+PROMPT 9 (2025-10-27T12:57:21.066-05:00):
+Lets create another pokemon endpoint:
+
+  - the endpoint should called as /pokemons/{id}, and this should retrieve the pokemon info by given id.
+  - we need the following data in a single object:
+    1. name: should be taken from "name".
+    2. id: should be taken from "id"
+    3. image: should be taken from "sprites.other.official-artwork.front_default"
+    4. types: should be taken from the array "types": 'type.name' from each value from the array and should be returned as array of strings
+    5. height: should be taken from "height"
+    6. abilities: should be taken from the array "abilities": 'ability.name' from each value from the array and should be returned as array of strings
+    7. stats: should be taken from the array "stats": create a single object taken values by key -> { [stat.name]: base_stat }
+
+PROMPT 10 (2025-10-27T13:05:16.445-05:00):
+Add jest, and add some basic unit tests to: controllers, middlewares and services
+
+PROMPT 11 (2025-10-27T13:09:37.831-05:00):
+Now, add a read with the an overview ot this application, and some steps of how use the endpoints, and how run the application
+
+PROMPT 12 (2025-10-27T13:16:33.057-05:00):
+Add in the readme that we used genIA to build this app, add IA assistant that we used, add that we used the ubuntu console to create the chat, add the LLM that we used
